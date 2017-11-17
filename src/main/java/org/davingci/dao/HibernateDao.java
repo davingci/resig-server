@@ -95,12 +95,22 @@ public class HibernateDao implements IDao {
      * @throws Exception
      */
     public List<?> findByHQL(String hql) {
+    	Session session=null;
         try {
-            Query queryObject = HibernateUtils.getSessionFactory().openSession().createQuery(hql);
+        	session = HibernateUtils.getSessionFactory().openSession();
+            Query queryObject = session.createQuery(hql);
             return queryObject.list();
         } catch (Exception e) {
+        	session.beginTransaction().rollback();//事务回滚
+            if(session!=null){
+              session.close();
+            }
             e.printStackTrace();
             return null;
+        } finally {
+        	if(session!=null){
+                session.close();
+             }
         }
     }
     /**
@@ -110,21 +120,31 @@ public class HibernateDao implements IDao {
      * @return，查找的实体对象
      * @throws Exception
      */
-    public Object findById(Class cls,Serializable key)
-
-    {
+    public Object findById(Class cls,Serializable key) {
+    	Session session=null;
         try {
-            Object instance = (Object) HibernateUtils.getSessionFactory().openSession().get(cls, key);
+        	session = HibernateUtils.getSessionFactory().openSession();
+            Object instance = (Object) session.get(cls, key);
             return instance;
         } catch (Exception e) {
+        	session.beginTransaction().rollback();//事务回滚
+            if(session!=null){
+              session.close();
+            }
             e.printStackTrace();
             return null;
+        } finally {
+        	if(session!=null){
+                session.close();
+             }
         }
     }
 
 	public List<?> findByHQL(String hql, HashMap params) {
+		Session session=null;
 		 try {
-	            Query queryObject = HibernateUtils.getSessionFactory().openSession().createQuery(hql);
+			    session = HibernateUtils.getSessionFactory().openSession();
+	            Query queryObject = session.createQuery(hql);
 	            Iterator iter = params.entrySet().iterator();
 	            while (iter.hasNext()) {
 	            	Map.Entry entry = (Map.Entry) iter.next();
@@ -133,16 +153,27 @@ public class HibernateDao implements IDao {
 	            	queryObject.setParameter(key, val);
 	            }
 	            return queryObject.list();
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            return null;
-	        }
+        } catch (Exception e) {
+        	session.beginTransaction().rollback();//事务回滚
+            if(session!=null){
+              session.close();
+            }
+            e.printStackTrace();
+           
+            return null;
+        } finally {
+        	if(session!=null){
+                session.close();
+              }
+        }
 		
 	}
 
 	public List<?> findByHQL(String hql, List params) {
+		Session session=null;
 		try {
-            Query queryObject = HibernateUtils.getSessionFactory().openSession().createQuery(hql);
+			session = HibernateUtils.getSessionFactory().openSession();
+            Query queryObject = session.createQuery(hql);
             if(params.size() > 0) {
             	for(int i=0; i<params.size(); i++) {
             		queryObject.setParameter(i, params.get(i));
@@ -150,8 +181,17 @@ public class HibernateDao implements IDao {
             }
             return queryObject.list();
         } catch (Exception e) {
+        	session.beginTransaction().rollback();//事务回滚
+            if(session!=null){
+              session.close();
+            }
             e.printStackTrace();
             return null;
+            
+        } finally {
+        	if(session!=null){
+                session.close();
+            }
         }
 	}
     

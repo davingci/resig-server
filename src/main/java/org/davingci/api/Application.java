@@ -5,6 +5,7 @@
 
 package org.davingci.api;
 
+import org.davingci.filter.AuthenticationFilter;
 import org.davingci.filter.CORSResponseFilter;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -18,6 +19,7 @@ public class Application extends ResourceConfig {
 		public Application(){
 			packages("org.davingci.api");
 			register(CORSResponseFilter.class);
+			register(AuthenticationFilter.class);
 		}
 
 }

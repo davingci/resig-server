@@ -1,3 +1,3 @@
 # todo list
 
-* token authentication
+* token authentication (done at 2017-11-18)

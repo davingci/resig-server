@@ -18,8 +18,11 @@ public class ResponseUtil implements Serializable {
 	private String message;
 	
 	public ResponseUtil() {
+		
 		super();
-		// TODO Auto-generated constructor stub
+		code = 0;
+		data = null;
+		message = "";
 	}
 
 	public ResponseUtil(int code, Object data, String message) {

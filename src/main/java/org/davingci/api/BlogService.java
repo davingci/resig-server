@@ -5,6 +5,7 @@
 
 package org.davingci.api;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,27 +18,38 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
+import org.davingci.annotation.Secured;
 import org.davingci.dao.HibernateDao;
 import org.davingci.pojo.Blog;
+import org.davingci.security.AuthPrincipal;
 import org.davingci.util.CalendarUtil;
 import org.davingci.util.ResponseUtil;
 
 @Path("/blog")
 public class BlogService {
+	
+	@Context
+    SecurityContext securityContext;	
 
+	@Secured
 	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")
 	public Response add(@FormParam("title") String title, 
-						@FormParam("content") String content,
-						@FormParam("userId") int userId,
-						@FormParam("username") String username) {
+						@FormParam("content") String content) {
 		
 		Date createTime = CalendarUtil.getNow();
 		Date lastModifyTime = CalendarUtil.getNow();
+		
+		AuthPrincipal principal = (AuthPrincipal) securityContext.getUserPrincipal();
+
+	    String username = principal.getUsername();
+	    int userId = principal.getUserId();
 		
 		Blog blog = new Blog.BlogBuilder()
 							.title(title)
@@ -55,7 +67,7 @@ public class BlogService {
 		return Response.status(200).entity(ru).build();
 	}
 	
-	
+	@Secured
 	@POST
 	@Path("/update")
 	@Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")
@@ -85,6 +97,7 @@ public class BlogService {
 		return Response.status(200).entity(ru).build();
 	}
 	
+	
 	@GET
 	@Path("/get/{blogId}")
 	@Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")
@@ -103,6 +116,7 @@ public class BlogService {
 		return Response.status(200).entity(ru).build();
 	}
 	
+	@Secured
 	@POST
 	@Path("/delete")
 	@Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")
