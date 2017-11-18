@@ -50,12 +50,15 @@ public class UserService {
 	        ResponseUtil ru = new ResponseUtil();
 	        ru.data(token);
 			return Response.ok(ru).build();
-		} catch(NotAuthorizedException e ) {	
-			return e.getResponse();
+		} catch(DavingciException e ) {	
+			ResponseUtil ru = new ResponseUtil();
+			
+			ru.message(e.getMessage()).code(401);
+			return Response.status(Response.Status.OK).entity(ru).build();
 		} catch(NullPointerException e) {
 			ResponseUtil ru = new ResponseUtil();
 			ru.message(e.getMessage());
-			return Response.status(Response.Status.UNAUTHORIZED).entity(ru).build();
+			return Response.status(Response.Status.OK).entity(ru).build();
 		}
         
 	}
@@ -72,17 +75,14 @@ public class UserService {
 				return user;
 			}
 			else {
-				ResponseUtil ru = new ResponseUtil();
-				ru.message("Invalid Password.");
-				Response response =  Response.status(Response.Status.UNAUTHORIZED).entity(ru).build();
-				throw new NotAuthorizedException("Invalid Password.",response);
+				
+				
+				throw new DavingciException("password is wrong.");
 			}
 		}
 		else {
-			ResponseUtil ru = new ResponseUtil();
-			ru.message("Invalid Username.");
-			Response response =  Response.status(Response.Status.UNAUTHORIZED).entity(ru).build();
-			throw new NotAuthorizedException("Invalid Username.",response);
+			
+			throw new DavingciException("username does not exist.");
 		}
 	}
 	
@@ -114,12 +114,8 @@ public class UserService {
 			return Response.status(200).entity(ru).build();
 		}
 		else {
-			User user = new User(username,password);
-			dao.add(user);
-			List l = dao.findByHQL(hql);
-			User u = (User) l.get(0);
-			u.setPassword(null);
-			ru.code(200).message("register success.").data(JSON.toJSON(u));
+			
+			ru.code(200).message("register success.");
 			return Response.status(200).entity(ru).build();
 		}
 		

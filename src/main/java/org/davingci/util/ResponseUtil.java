@@ -20,8 +20,8 @@ public class ResponseUtil implements Serializable {
 	public ResponseUtil() {
 		
 		super();
-		code = 0;
-		data = null;
+		code = 200;
+		data = "";
 		message = "";
 	}
 
