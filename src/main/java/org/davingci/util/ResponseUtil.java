@@ -31,6 +31,49 @@ public class ResponseUtil implements Serializable {
 		this.data = data;
 		this.message = message;
 	}
+	
+	private ResponseUtil(ResponseBuilder b) {
+		this.code = b.code;
+		this.message = b.message;
+		this.data = b.data;
+	}
+	
+	public static class ResponseBuilder {
+		
+		private int  code;
+		private Object data;
+		private String message;
+		
+		
+		
+		public ResponseBuilder() {
+			
+		}
+
+		public ResponseBuilder code(int code) {
+			this.code = code;
+			return this;
+		}
+		
+		public ResponseBuilder data(Object data) {
+			this.data = data;
+			return this;
+		}
+		
+		public ResponseBuilder message(String message) {
+			this.message = message;
+			return this;
+		}
+		
+		public ResponseUtil build() {
+			return new ResponseUtil(this);
+		}
+	}
+
+	
+	
+	
+	
 
 	public int getCode() {
 		return code;
@@ -71,4 +114,7 @@ public class ResponseUtil implements Serializable {
 		this.message = message;
 		return this;
 	}
+	
+	
+	
 }

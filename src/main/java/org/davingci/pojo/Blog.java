@@ -26,14 +26,12 @@ public class Blog {
 	@Column(name="title")
 	private String title;
 	
-	@Column(name="content")
-	private String content;
 	
-	@Column(name="createTime")
-	private Date createTime;
+	@Column(name="createAt")
+	private Date createAt;
 	
-	@Column(name="lastModifyTime")
-	private Date lastModifyTime;
+	@Column(name="lastModifyAt")
+	private Date lastModifyAt;
 	
 	@Column(name="userId")
 	private int userId;
@@ -41,7 +39,23 @@ public class Blog {
 	@Column(name="username")
 	private String username;
 	
+	@Column(name="html")
+	private String html;
 	
+	@Column(name="markdown")
+	private String markdown;
+	
+	@Column(name="blogEditor")
+	private String blogEditor;
+	
+	@Column(name="viewCount")
+	private int viewCount;
+	
+	@Column(name="favouriteCount")
+	private int favouriteCount;
+	
+	@Column(name="markCount")
+	private int markCount;
 
 	public Blog() {
 		super();
@@ -49,21 +63,71 @@ public class Blog {
 	}
 	
 	private Blog(BlogBuilder b) {
-		this.content = b.content;
-		this.createTime = b.createTime;
-		this.lastModifyTime = b.lastModifyTime;
+		
 		this.title = b.title;
+		this.html = b.html;
+		this.markdown = b.markdown;
+		this.blogEditor = b.blogEditor;
+		
+		this.createAt = b.createAt;
+		this.lastModifyAt = b.lastModifyAt;
+		
+		
+		
 		this.userId = b.userId;
 		this.username = b.username;
 	}
 
-	public int getBlogId() {
-		return blogId;
+	
+	public void addFavourite() {
+		this.favouriteCount++;
+	}
+	
+	public void cancleFavourite() {
+		this.favouriteCount--;
+	}
+	
+	public void addMark() {
+		this.markCount++;
+	}
+	
+	public void cancleMark() {
+		this.markCount--;
+	}
+	
+	public int getFavouriteCount() {
+		return favouriteCount;
 	}
 
-	public void setBlogId(int blogId) {
-		this.blogId = blogId;
+	public void setFavouriteCount(int favouriteCount) {
+		this.favouriteCount = favouriteCount;
 	}
+
+	public int getMarkCount() {
+		return markCount;
+	}
+
+	public void setMarkCount(int markCount) {
+		this.markCount = markCount;
+	}
+
+	public String getHtml() {
+		return html;
+	}
+
+	public void setHtml(String html) {
+		this.html = html;
+	}
+
+	public String getMarkdown() {
+		return markdown;
+	}
+
+	public void setMarkdown(String markdown) {
+		this.markdown = markdown;
+	}
+
+	
 
 	public String getTitle() {
 		return title;
@@ -73,28 +137,42 @@ public class Blog {
 		this.title = title;
 	}
 
-	public String getContent() {
-		return content;
+
+
+	
+
+	public String getUsername() {
+		return username;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	
+	
+	public int getBlogId() {
+		return blogId;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
+	public void setBlogId(int blogId) {
+		this.blogId = blogId;
 	}
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public Date getCreateAt() {
+		return createAt;
 	}
 
-	public Date getLastModifyTime() {
-		return lastModifyTime;
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
 	}
 
-	public void setLastModifyTime(Date lastModifyTime) {
-		this.lastModifyTime = lastModifyTime;
+	public Date getLastModifyAt() {
+		return lastModifyAt;
+	}
+
+	public void setLastModifyAt(Date lastModifyAt) {
+		this.lastModifyAt = lastModifyAt;
 	}
 
 	public int getUserId() {
@@ -105,24 +183,49 @@ public class Blog {
 		this.userId = userId;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getBlogEditor() {
+		return blogEditor;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setBlogEditor(String blogEditor) {
+		this.blogEditor = blogEditor;
 	}
 	
+
+	public int getViewCount() {
+		return viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+
+
+
+
+
+
+
+
+
+
+
 	public static class BlogBuilder {
 		
-		private int blogId;
+
 		private String title;
 		private String content;
-		private Date createTime;
-		private Date lastModifyTime;
+		private String html;
+		private String markdown;
+		private String blogEditor;
+		
+		private Date createAt;
+		private Date lastModifyAt;
 		
 		private int userId;
 		private String username;
+		
+		
 		
 		public BlogBuilder() {
 			
@@ -138,13 +241,29 @@ public class Blog {
 			return this;
 		}
 		
-		public BlogBuilder createTime(Date createTime) {
-			this.createTime = createTime;
+		public BlogBuilder html(String html) {
+			this.html = html;
 			return this;
 		}
 		
-		public BlogBuilder lastModifyTime(Date lastModifyTime) {
-			this.lastModifyTime = lastModifyTime;
+		public BlogBuilder markdown(String markdown) {
+			this.markdown = markdown;
+			return this;
+		}
+		
+		public BlogBuilder blogEditor(String blogEditor) {
+			this.blogEditor = blogEditor;
+			return this;
+		}
+		
+		
+		public BlogBuilder createAt(Date createAt) {
+			this.createAt = createAt;
+			return this;
+		}
+		
+		public BlogBuilder lastModifyAt(Date lastModifyAt) {
+			this.lastModifyAt= lastModifyAt;
 			return this;
 		}
 		

@@ -10,6 +10,7 @@ public interface IDao {
 	public void update(Object object);
 	public void delete(Object object);
 	public List<?> findByHQL(String hql);
+	public Object findOneByHQL(String hql);
 	public List<?> findByHQL(String hql, HashMap params);
 	public List<?> findByHQL(String hql, List params);
 }

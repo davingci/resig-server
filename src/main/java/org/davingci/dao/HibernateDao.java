@@ -194,6 +194,31 @@ public class HibernateDao implements IDao {
             }
         }
 	}
+
+	@Override
+	public Object findOneByHQL(String hql) {
+		Session session=null;
+        try {
+        	session = HibernateUtils.getSessionFactory().openSession();
+            Query queryObject = session.createQuery(hql);
+            List list =  queryObject.list();
+            if(list.size() > 0) {
+            	return list.get(0);
+            }
+            else return null;
+        } catch (Exception e) {
+        	session.beginTransaction().rollback();//事务回滚
+            if(session!=null){
+              session.close();
+            }
+            e.printStackTrace();
+            return null;
+        } finally {
+        	if(session!=null){
+                session.close();
+             }
+        }
+	}
     
     
 
