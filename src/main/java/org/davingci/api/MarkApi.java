@@ -37,6 +37,29 @@ public class MarkApi {
 	BlogService bService = new BlogService();
 	
 	/**
+	 * @api {post} /mark/add Mark
+	 * @apiVersion 0.1.0
+	 * @apiName Mark
+	 * @apiGroup Mark
+	 * @apiPermission authorization
+	 * @apiDescription mark blog
+	 * 
+	 * @apiUse Header
+	 
+	 * @apiParam {String} blogId the id of the blog which you would like to mark.
+	
+	 * @apiUse Success
+	 * @apiSuccessExample Success-Response:
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 200,
+	 *       "message": "success.",
+	 *       "data":""
+	 *     }
+	 
+	 * @apiUse Unauthorized
+	 */
+	/**
 	 * insert record into favourite table
 	 * update markCount in blog table
 	 * @return
@@ -61,6 +84,29 @@ public class MarkApi {
 		
 	}
 	
+	/**
+	 * @api {post} /mark/cancle Mark
+	 * @apiVersion 0.1.0
+	 * @apiName CancleMark
+	 * @apiGroup Mark
+	 * @apiPermission authorization
+	 * @apiDescription cancle mark blog
+	 * 
+	 * @apiUse Header
+	 
+	 * @apiParam {String} blogId the id of the blog which you would like to cancle mark.
+	
+	 * @apiUse Success
+	 * @apiSuccessExample Success-Response:
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 200,
+	 *       "message": "success.",
+	 *       "data":""
+	 *     }
+	 
+	 * @apiUse Unauthorized
+	 */
 	/**
 	 * insert record into favourite table
 	 * update markCount in blog table

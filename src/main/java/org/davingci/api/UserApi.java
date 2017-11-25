@@ -134,6 +134,42 @@ public class UserApi {
 		
 	}
 	
+	/**
+	 * @api {get} /user/get/{userId} Get User Info
+	 * @apiVersion 0.1.0
+	 * @apiName GetUser
+	 * @apiGroup User
+	 * @apiPermission authorization
+	 * @apiDescription get user info 
+	 * @apiUse Header
+	 * @apiParam {String} userId the userId of the user who you would like to get 
+
+	 * @apiUse Success
+	 * @apiSuccessExample Get Success:
+		{
+		    "code": 200,
+		    "data": {
+		        "avatarUrl": "",
+		        "createAt": 1510820764000,
+		        "email": "huangdongxu21@sina.com",
+		        "followeeCount": 0,
+		        "followerCount": 2,
+		        "mobilePhone": "13300720072",
+		        "password": "8b23e481a67963d094319ca983b20661f001f2b532e9f608c45c38a504594251",
+		        "userId": 1,
+		        "username": "huangdongxu"
+		    },
+		    "message": "success."
+		}
+	 * @apiSuccessExample Can't Get UserInfo:
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 201,
+	 *       "message": "can not find user",
+	 *       "data":""
+	 *     }
+	 *  @apiUse Unauthorized
+	 */
 	@Secured
 	@GET
 	@Path("/get/{userId}")

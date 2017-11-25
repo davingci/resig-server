@@ -32,6 +32,29 @@ public class FavouriteApi {
     SecurityContext sc;
 	
 	/**
+	 * @api {post} /favourite/add Add Favourite
+	 * @apiVersion 0.1.0
+	 * @apiName AddFavourite
+	 * @apiGroup Favourite
+	 * @apiPermission authorization
+	 * @apiDescription add favourite
+	 * 
+	 * @apiUse Header
+	 
+	 * @apiParam {String} blogId the id of the blog which you would like to add to favourite list.
+	
+	 * @apiUse Success
+	 * @apiSuccessExample Success-Response:
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 200,
+	 *       "message": "success.",
+	 *       "data":""
+	 *     }
+	 
+	 * @apiUse Unauthorized
+	 */
+	/**
 	 * insert record into favourite table
 	 * update favourteCount in blog table
 	 * @return
@@ -61,6 +84,29 @@ public class FavouriteApi {
 		
 	}
 	
+	/**
+	 * @api {post} /favourite/cancle Cancle Favourite
+	 * @apiVersion 0.1.0
+	 * @apiName CancleFavourite
+	 * @apiGroup Favourite
+	 * @apiPermission authorization
+	 * @apiDescription cancle favourite
+	 * 
+	 * @apiUse Header
+	 
+	 * @apiParam {String} blogId the id of the blog which you would like to  remove from  favourite list.
+	
+	 * @apiUse Success
+	 * @apiSuccessExample Success-Response:
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 200,
+	 *       "message": "success.",
+	 *       "data":""
+	 *     }
+	 
+	 * @apiUse Unauthorized
+	 */
 	/**
 	 * delete record from favourite table
 	 * update favourite in blog table

@@ -32,6 +32,29 @@ public class FollowApi {
 	@Context
     SecurityContext securityContext;
 	
+	/**
+	 * @api {post} /follow/add Add Follow
+	 * @apiVersion 0.1.0
+	 * @apiName AddFollow
+	 * @apiGroup Follow
+	 * @apiPermission authorization
+	 * @apiDescription add follow
+	 * 
+	 * @apiUse Header
+	 
+	 * @apiParam {String} followeeId userId of the user who you would like to follow.
+	
+	 * @apiUse Success
+	 * @apiSuccessExample Success-Response:
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 200,
+	 *       "message": "success.",
+	 *       "data":""
+	 *     }
+	 
+	 * @apiUse Unauthorized
+	 */
 	@Secured
 	@POST
 	@Path("/add")
@@ -60,6 +83,29 @@ public class FollowApi {
 		
 	}
 	
+	/**
+	 * @api {post} /follow/cancle Cancle Follow
+	 * @apiVersion 0.1.0
+	 * @apiName CancleFollow
+	 * @apiGroup Follow
+	 * @apiPermission authorization
+	 * @apiDescription cancle follow
+	 * 
+	 * @apiUse Header
+	 
+	 * @apiParam {String} userId of the user who you would like to cancle follow.
+	
+	 * @apiUse Success
+	 * @apiSuccessExample Success-Response:
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 200,
+	 *       "message": "success.",
+	 *       "data":""
+	 *     }
+	 
+	 * @apiUse Unauthorized
+	 */
 	@Secured
 	@POST
 	@Path("/cancle")

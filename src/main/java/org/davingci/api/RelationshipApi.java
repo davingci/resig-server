@@ -25,6 +25,35 @@ public class RelationshipApi {
 
 	RelationshipService service = new RelationshipService();
 	
+	/**
+	 * @api {post} /relationship/user User Relationship
+	 * @apiVersion 0.1.0
+	 * @apiName User User Relationship
+	 * @apiGroup Relationship
+	 * @apiPermission authorization
+	 * @apiDescription check whether you follow somebody.
+	 * 
+	 * @apiUse Header
+	 
+	 * @apiParam {String} userId the userId of the user who you would like to know whether you have followed.
+	
+	 * @apiUse Success
+	 * @apiSuccessExample Followed:
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 200,
+	 *       "message": "isFollowed",
+	 *       "data":true
+	 *     }
+	 * @apiSuccessExample unFollowed:
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 200,
+	 *       "message": "unFollowed",
+	 *       "data":false
+	 *     }	 
+	 * @apiUse Unauthorized
+	 */
 	@Secured
 	@POST
 	@Path("/user")
@@ -43,6 +72,49 @@ public class RelationshipApi {
 		}
 	}
 	
+	/**
+	 * @api {post} /relationship/blog User Blog Relationship
+	 * @apiVersion 0.1.0
+	 * @apiName User Blog Relationship
+	 * @apiGroup Relationship
+	 * @apiPermission authorization
+	 * @apiDescription check whether you mark,favourite the blog.
+	 * 
+	 * @apiUse Header
+	 
+	 * @apiParam {String} blogId the blogId of the blog you would like to know whether you have mark or add to you favourite list.
+	
+	 * @apiUse Success
+	 * @apiSuccessExample Favourite Marked
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 200,
+	 *       "message": "",
+	 *       "data":"FavouriteMarked"
+	 *     }
+	 * @apiSuccessExample Favourite UnMarked
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 200,
+	 *       "message": "",
+	 *       "data":"FavouriteUnMarked"
+	 *     }
+	 * @apiSuccessExample UnFavourite Marked
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 200,
+	 *       "message": "",
+	 *       "data":"UnFavouriteMarked"
+	 *     }
+	 * @apiSuccessExample UnFavourite UnMarked
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": 200,
+	 *       "message": "",
+	 *       "data":"UnFavouriteUnMarked"
+	 *     }	 
+	 * @apiUse Unauthorized
+	 */
 	@Secured
 	@POST
 	@Path("/blog")
